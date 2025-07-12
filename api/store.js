@@ -8,27 +8,20 @@ module.exports = async (req, res) => {
   }
 
   try {
+    // ✅ opensheet 주소 수정
     const sheetUrl = "https://opensheet.elk.sh/11nBstYlw_sWr5GStL2FkR-AsX5JjtnhGaDIgUQxjmYI/Sheet1";
-
-
     const response = await fetch(sheetUrl);
+    const rawText = await response.text();
 
-    // ✅ 응답 확인
-    if (!response.ok) {
-      return res.status(500).json({ error: "시트 응답 실패", status: response.status });
-    }
-
-    const data = await response.json();
-
-    // ✅ 응답 형식 확인
-    if (!Array.isArray(data)) {
-      return res.status(500).json({ error: "시트 형식 오류", data });
-    }
+    // ✅ 줄 단위로 자르고 각각 JSON 파싱
+    const lines = rawText.trim().split("\n");
+    const data = lines.map(line => JSON.parse(line));
 
     console.log("불러온 데이터:", data);
 
+    // ✅ 매장명 또는 전화번호 일치하는 항목 찾기
     const match = data.find(
-      (row) => row["매장명"] === storeName || row["전화번호"] === storeName
+      row => row["매장명"] === storeName || row["전화번호"] === storeName
     );
 
     if (!match) {
@@ -36,7 +29,9 @@ module.exports = async (req, res) => {
     }
 
     return res.status(200).json({ result: match });
+
   } catch (error) {
+    console.error("서버 오류:", error);
     return res.status(500).json({ error: "서버 오류: " + error.message });
   }
 };
