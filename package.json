@@ -1,0 +1,12 @@
+{
+  "name": "store-info-api",
+  "version": "1.0.0",
+  "description": "Store info fetcher from Google Sheets",
+  "main": "api/store.js",
+  "scripts": {
+    "start": "node api/store.js"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  }
+}
