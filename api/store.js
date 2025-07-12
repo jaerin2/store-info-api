@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
 
   try {
     // ✅ 여기에 본인 시트 ID로 수정
-    const sheetUrl = "https://opensheet.vercel.app/1YourSheetID1234567890abcdef/Sheet1";
+    const sheetUrl = "https://opensheet.vercel.app/11nBstYlw_sWr5GStL2FkR-AsX5JjtnhGaDIgUQxjmYI/Sheet1";
 
     const response = await fetch(sheetUrl);
     const data = await response.json();
