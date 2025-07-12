@@ -9,10 +9,22 @@ module.exports = async (req, res) => {
 
   try {
     const sheetUrl = "https://opensheet.vercel.app/11nBstYlw_sWr5GStL2FkR-AsX5JjtnhGaDIgUQxjmYI/Sheet1";
+
     const response = await fetch(sheetUrl);
+
+    // ✅ 응답 확인
+    if (!response.ok) {
+      return res.status(500).json({ error: "시트 응답 실패", status: response.status });
+    }
+
     const data = await response.json();
 
-    console.log("📦불러온 데이터:", data);
+    // ✅ 응답 형식 확인
+    if (!Array.isArray(data)) {
+      return res.status(500).json({ error: "시트 형식 오류", data });
+    }
+
+    console.log("불러온 데이터:", data);
 
     const match = data.find(
       (row) => row["매장명"] === storeName || row["전화번호"] === storeName
