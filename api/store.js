@@ -8,7 +8,8 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const sheetUrl = "https://opensheet.vercel.app/11nBstYlw_sWr5GStL2FkR-AsX5JjtnhGaDIgUQxjmYI/Sheet1";
+    const sheetUrl = "https://opensheet.elk.sh/11nBstYlw_sWr5GStL2FkR-AsX5JjtnhGaDIgUQxjmYI/Sheet1";
+
 
     const response = await fetch(sheetUrl);
 
