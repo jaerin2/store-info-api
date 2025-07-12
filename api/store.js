@@ -8,14 +8,11 @@ module.exports = async (req, res) => {
   }
 
   try {
-    // ✅ 여기에 본인 시트 ID로 수정
     const sheetUrl = "https://opensheet.vercel.app/11nBstYlw_sWr5GStL2FkR-AsX5JjtnhGaDIgUQxjmYI/Sheet1";
-
     const response = await fetch(sheetUrl);
     const data = await response.json();
 
-    // ✅ 디버깅용 출력 (Vercel Logs에서 확인 가능)
-    console.log("불러온 데이터:", data);
+    console.log("📦불러온 데이터:", data);
 
     const match = data.find(
       (row) => row["매장명"] === storeName || row["전화번호"] === storeName
